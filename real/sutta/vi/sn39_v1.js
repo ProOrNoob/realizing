@@ -1,0 +1,40 @@
+window.BILARA = window.BILARA || {};
+window.BILARA["sn39_v1"] = window.BILARA["sn39_v1"] || {};
+window.BILARA["sn39_v1"]["vi"] = {
+  "sn39.1-15:0.1": "Tương Ưng Bộ 39.1 ",
+  "sn39.1-15:0.2": "1. Phẩm Sāmaṇḍaka ",
+  "sn39.1-15:0.3": "Kinh Sāmaṇḍaka ",
+  "sn39.1-15:1.1": "Một thời, Tôn giả Sāriputta đang trú tại Ukkacelā, bên bờ sông Gaṅgā, trong vùng Vajji. ",
+  "sn39.1-15:1.2": "Lúc bấy giờ, du sĩ Sāmaṇḍaka đến gặp Tôn giả Sāriputta; sau khi đến, liền chào hỏi thân thiện với Tôn giả Sāriputta. ",
+  "sn39.1-15:1.3": "Sau khi trao đổi những lời thăm hỏi xã giao, ông ngồi xuống một bên. Ngồi một bên, du sĩ Sāmaṇḍaka thưa với Tôn giả Sāriputta: ",
+  "sn39.1-15:2.1": "'Thưa Hiền giả Sāriputta, người ta thường nói 'Niết-bàn, Niết-bàn'. '",
+  "sn39.1-15:2.2": "Vậy thưa Hiền giả, Niết-bàn là gì?' ",
+  "sn39.1-15:2.3": "'Thưa Hiền giả, sự đoạn tận tham, sự đoạn tận sân, sự đoạn tận si '",
+  "sn39.1-15:2.4": "đó được gọi là Niết-bàn.' ",
+  "sn39.1-15:2.5": "'Thưa Hiền giả, vậy có con đường, có lối thực hành để chứng ngộ Niết-bàn đó không?' ",
+  "sn39.1-15:2.6": "'Thưa Hiền giả, có con đường, có lối thực hành để chứng ngộ Niết-bàn đó.' ",
+  "sn39.1-15:3.1": "'Vậy thưa Hiền giả, con đường đó là gì, lối thực hành đó là gì để chứng ngộ Niết-bàn?' ",
+  "sn39.1-15:3.2": "'Thưa Hiền giả, chính là con đường Thánh tám ngành để chứng ngộ Niết-bàn đó, đó là '",
+  "sn39.1-15:3.3": "chánh kiến …(cho đến)… chánh định. ",
+  "sn39.1-15:3.4": "Thưa Hiền giả, đó là con đường, đó là lối thực hành để chứng ngộ Niết-bàn.' ",
+  "sn39.1-15:3.5": "'Thưa Hiền giả, thật là con đường tốt lành, thật là lối thực hành tốt lành để chứng ngộ Niết-bàn. '",
+  "sn39.1-15:3.6": "Thưa Hiền giả Sāriputta, thật đủ để không phóng dật.' ",
+  "sn39.1-15:3.7": "Kinh thứ nhất. ",
+  "sn39.1-15:4.1": "(Cần được giải thích đầy đủ như Tương Ưng Jambukhādaka.) ",
+  "sn39.16:0.1": "Tương Ưng Bộ 39.16 ",
+  "sn39.16:0.2": "1. Phẩm Sāmaṇḍaka ",
+  "sn39.16:0.3": "Kinh Điều Khó Làm ",
+  "sn39.16:1.1": "'Thưa Hiền giả Sāriputta, điều gì là khó làm trong Pháp và Luật này?' ",
+  "sn39.16:1.2": "'Thưa Hiền giả, xuất gia là điều khó trong Pháp và Luật này.' ",
+  "sn39.16:1.3": "'Thưa Hiền giả, đối với người đã xuất gia thì điều gì là khó?' ",
+  "sn39.16:1.4": "'Thưa Hiền giả, đối với người đã xuất gia, điều khó là giữ được niềm vui trong đời sống phạm hạnh.' ",
+  "sn39.16:1.5": "'Thưa Hiền giả, đối với người đã có niềm vui đó thì điều gì là khó?' ",
+  "sn39.16:1.6": "'Thưa Hiền giả, đối với người đã có niềm vui đó, điều khó là thực hành pháp và tùy pháp.' ",
+  "sn39.16:1.7": "'Thưa Hiền giả, sau bao lâu thì một Tỳ Kheo thực hành pháp và tùy pháp có thể chứng đắc quả A-la-hán?' ",
+  "sn39.16:1.8": "'Thưa Hiền giả, không lâu đâu.' ",
+  "sn39.16:1.9": "Kinh thứ mười sáu. ",
+  "sn39.16:1.10": "(Phần tóm tắt giống như phần trước.) ",
+  "sn39.16:1.11": "Tương Ưng Sāmaṇḍaka kết thúc. "
+}
+window.BILARA["sn39_v1"]["vi"]["sn39_v1:source"] =
+ "Dịch từ nguồn Pali https://suttacentral.net/ .Trong quá trình dịch có thể có sai sót, vui lòng đối chiếu bản gốc Pali, và tiếng Anh. Mọi góp ý chỉnh sửa xin vui lòng email: tuanctvn199@gmail.com ";

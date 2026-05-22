@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+<meta name="description" content="Collection of Nikaya Suttas in Pali, English, and Vietnamese, sourced from SuttaCentral and Bilara json project">
+<title>Sutta Archive</title>
+<script>
+(function(){
+try {
+var t = localStorage.getItem('sutra-dark-mode');
+if (t === 'dark') {
+document.documentElement.setAttribute('data-theme','dark');
+} else if (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+document.documentElement.setAttribute('data-theme','dark');
+}
+} catch(e){}
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Noto+Serif:ital,wght@0,400;0,500;1,400&family=Geist+Mono:wght@300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Noto+Serif:ital,wght@0,400;0,500;1,400&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
+<link rel="preload" href="styles.css?v=42" as="style">
+<link rel="stylesheet" href="styles.css?v=42">
+</head>
+<body>
+<div class="app">
+<div class="card" id="card">
+<header class="top-bar top-note" role="banner">
+<div class="bar-in">
+<div class="bar-center"><span id="dedicationText" class="ded-phrase-text">Namo tassa bhagavato arahato sammāsambuddhassa</span></div>
+</div>
+</header>
+<section class="header" role="region" aria-label="Sutta title">
+<div id="supertitle"></div>
+<h1 id="title">Chưa chọn bài</h1>
+<button type="button" id="btnShareCurrent" class="title-share-btn" hidden aria-haspopup="menu" aria-expanded="false" aria-label="Chia sẻ bài kinh" title="Chia sẻ">
+<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<circle cx="5" cy="10" r="2.4"/>
+<circle cx="15" cy="5" r="2.4"/>
+<circle cx="15" cy="15" r="2.4"/>
+<path d="M7.2 8.9l5.6-3.4M7.2 11.1l5.6 3.4"/>
+</svg>
+</button>
+<button type="button" id="btnBookmarkCurrent" class="title-bookmark-btn" hidden aria-pressed="false" aria-label="Đánh dấu bài kinh này" title="Đánh dấu">
+<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M10 2.3l2.39 4.84 5.34.78-3.86 3.77.91 5.31L10 14.49l-4.78 2.51.91-5.31L2.27 7.92l5.34-.78z"/>
+</svg>
+</button>
+<div id="shareMenu" class="share-menu" role="menu" aria-hidden="true" hidden>
+<button type="button" class="share-menu-item" data-share="copy" role="menuitem">
+<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<rect x="6" y="6" width="11" height="11" rx="1.5"/>
+<path d="M3 13V4a1 1 0 0 1 1-1h9"/>
+</svg>
+<span class="share-label" data-vi="Sao chép link" data-en="Copy link">Sao chép link</span>
+</button>
+<button type="button" class="share-menu-item" data-share="facebook" role="menuitem">
+<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+<path d="M11.4 19v-7.4h2.5l.4-2.9h-2.9V6.9c0-.8.2-1.4 1.5-1.4h1.6V2.9c-.3 0-1.2-.1-2.3-.1-2.2 0-3.8 1.4-3.8 3.9v2h-2.5v2.9h2.5V19h2.9z"/>
+</svg>
+<span class="share-label">Facebook</span>
+</button>
+<button type="button" class="share-menu-item" data-share="zalo" role="menuitem">
+<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+<path d="M10 3C5.6 3 2 5.8 2 9.3c0 2 1.2 3.7 3.1 4.9l-.5 1.9c-.1.3.2.6.5.4l2.4-1.3c.8.2 1.6.3 2.5.3 4.4 0 8-2.8 8-6.3S14.4 3 10 3zm-3.5 6.5c.4 0 .7.3.7.7s-.3.7-.7.7-.7-.3-.7-.7.3-.7.7-.7zm3.5 0c.4 0 .7.3.7.7s-.3.7-.7.7-.7-.3-.7-.7.3-.7.7-.7zm3.5 0c.4 0 .7.3.7.7s-.3.7-.7.7-.7-.3-.7-.7.3-.7.7-.7z"/>
+</svg>
+<span class="share-label">Zalo</span>
+</button>
+<button type="button" class="share-menu-item" data-share="twitter" role="menuitem">
+<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+<path d="M14.6 2h2.7l-5.9 6.7L18.3 18h-5.4l-4.2-5.5L3.8 18H1.1l6.3-7.1L1 2h5.5l3.8 5.1L14.6 2zm-1 14.4h1.5L6 3.5H4.4l9.2 12.9z"/>
+</svg>
+<span class="share-label" data-vi="X (Twitter)" data-en="X (Twitter)">X (Twitter)</span>
+</button>
+<button type="button" class="share-menu-item" data-share="email" role="menuitem">
+<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<rect x="2.5" y="4.5" width="15" height="11" rx="1.5"/>
+<path d="M3 5.5l7 5 7-5"/>
+</svg>
+<span class="share-label">Email</span>
+</button>
+<button type="button" class="share-menu-item" data-share="native" role="menuitem" hidden id="shareItemNative">
+<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M10 3v9M6 7l4-4 4 4M4 13v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3"/>
+</svg>
+<span class="share-label" data-vi="Hệ thống chia sẻ" data-en="System share">Hệ thống chia sẻ</span>
+</button>
+</div>
+<div id="subtitle" class="vi" aria-live="polite">—</div>
+<div id="titleMeta"></div>
+</section>
+<main id="sutraGrid" role="main" aria-live="polite" aria-busy="false"></main>
+<footer class="status">
+<div class="status-in">
+<div class="status-left">
+<button type="button" id="btnSettings" class="bar-pill" aria-label="Cài đặt hiển thị" aria-haspopup="true" aria-expanded="false" title="Cài đặt">
+<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+<circle cx="8" cy="8" r="2"/>
+<path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6L13 13M3 13l1.4-1.4M11.6 4.4L13 3"/>
+</svg>
+<span class="label-full" id="btnSettingsLabel">Cài đặt</span>
+</button>
+</div>
+<div class="status-center">
+<button type="button" id="btnPrev" class="nav-pill" disabled aria-label="Bài trước" title="Bài trước">
+<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>
+</button>
+<button type="button" id="sidebar-btn" class="bar-pill status-library-btn" title="Thư viện — mục lục bài kinh" aria-label="Mở danh mục bài kinh" aria-expanded="false">
+<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+<path d="M2 3v10M5 3v10M8 3v10M12 4l3 9M11 13h5"/>
+</svg>
+<span class="sidebar-label" id="sidebarBtnLabel">Thư viện</span>
+</button>
+<button type="button" id="btnNext" class="nav-pill" disabled aria-label="Bài tiếp theo" title="Bài tiếp">
+<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
+</button>
+</div>
+<div class="status-right">
+<button type="button" id="btnGuide" class="bar-pill" aria-label="Hướng dẫn" aria-haspopup="dialog" title="Hướng dẫn">
+<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<circle cx="12" cy="12" r="9"></circle>
+<path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.4-.9 2-1.6 2.4-.7.4-1.1.7-1.1 1.6v.4"></path>
+<path d="M12 16.2h.01"></path>
+</svg>
+<span class="label-full" id="btnGuideLabel">Hướng dẫn</span>
+</button>
+</div>
+<span id="navTitle" hidden></span>
+</div>
+</footer>
+<div id="debugPanel" class="debug-panel" hidden aria-hidden="true">
+<div class="debug-head">
+<span>DEBUG</span>
+<button type="button" id="btnDebugClose" class="debug-close" aria-label="Đóng debug">×</button>
+</div>
+<pre id="debugBody"></pre>
+<div class="debug-actions">
+<button type="button" id="btnClearStorage" class="debug-action-btn" title="Xóa toàn bộ localStorage + reload">
+🗑 Clear localStorage
+</button>
+</div>
+</div>
+<button type="button" id="btnBackTop" aria-label="Lên đầu trang" title="Back to top">
+<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5"/></svg>
+</button>
+</div>
+<div id="readingProgress" aria-hidden="true"><div id="readingProgressFill"></div><span id="readingProgressPct"></span></div>
+<div class="modal-scrim" aria-hidden="true"></div>
+<div id="sutraMenuPanel" class="panel" role="dialog"
+aria-label="Danh mục bài kinh" aria-hidden="true" inert>
+<div class="lib-topbar">
+<div class="search-box">
+<input id="sutraSearch" type="search"
+placeholder="Nhập tên bài kinh cần tìm..."
+aria-label="Tìm kiếm bài kinh" autocomplete="off">
+</div>
+<button id="menuCloseBtn" class="menu-close" type="button" aria-label="Đóng" title="Đóng">
+<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+<path d="M5 5l10 10M15 5l-10 10"/>
+</svg>
+</button>
+</div>
+<div id="sutraSearchResults" class="search-results" role="listbox" aria-label="Kết quả tìm kiếm"></div>
+<div class="nikaya-tiles" role="tablist" aria-label="Chọn bộ kinh">
+<button type="button" class="nikaya-tile" data-nikaya="DN" role="tab" aria-selected="false">
+<span class="tile-code">DN</span>
+<span class="tile-label" data-vi="Trường Bộ" data-en="Long Discourses">Trường Bộ</span>
+</button>
+<button type="button" class="nikaya-tile" data-nikaya="MN" role="tab" aria-selected="false">
+<span class="tile-code">MN</span>
+<span class="tile-label" data-vi="Trung Bộ" data-en="Middle Discourses">Trung Bộ</span>
+</button>
+<button type="button" class="nikaya-tile" data-nikaya="SN" role="tab" aria-selected="false">
+<span class="tile-code">SN</span>
+<span class="tile-label" data-vi="Tương Ưng" data-en="Connected">Tương Ưng</span>
+</button>
+<button type="button" class="nikaya-tile" data-nikaya="AN" role="tab" aria-selected="false">
+<span class="tile-code">AN</span>
+<span class="tile-label" data-vi="Tăng Chi" data-en="Numerical">Tăng Chi</span>
+</button>
+<button type="button" class="nikaya-tile nikaya-tile-bookmark" data-nikaya="BM" role="tab" aria-selected="false" aria-label="Bài đã lưu">
+<span class="tile-code" aria-hidden="true">★</span>
+<span class="tile-label" data-vi="Đã lưu" data-en="Saved">Đã lưu</span>
+<span class="tile-count" id="bookmarksCount" aria-hidden="true"></span>
+</button>
+</div>
+<ul id="sutraMenuList" class="sutra-list" role="tree" aria-label="Mục lục bài kinh"></ul>
+</div>
+<div id="settingsPanel" class="panel" aria-hidden="true" inert>
+<span id="settingsTitle" hidden>Tuỳ chỉnh</span>
+<div class="set-panel-body">
+<div class="set-sec" id="interfaceSection">
+<div class="set-sec-hd">
+<div class="set-hd-left">
+<span class="set-sec-title" id="settingsInterfaceLabel">Giao diện</span>
+<button class="set-hdr-btn debug-only" id="btnDebug" title="Debug info" aria-label="Debug info">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+<path d="M9 7l-5 5 5 5"/>
+<path d="M15 7l5 5-5 5"/>
+</svg>
+</button>
+</div>
+<button class="set-hdr-btn" id="btnSettingsClose" title="Đóng" aria-label="Đóng cài đặt">
+<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" width="16" height="16">
+<path d="M5 5l10 10M15 5l-10 10"/>
+</svg>
+</button>
+</div>
+<div class="set-sec-body">
+<div class="set-pills cols-4">
+<button class="pill set-icon-pill active" id="btnProgressToggle" aria-pressed="true"
+title="Hiện/ẩn thanh tiến độ đọc" aria-label="Hiện/ẩn thanh tiến độ đọc">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+<rect x="3" y="10" width="18" height="4" rx="1" fill="currentColor" fill-opacity="0.15"/>
+<rect x="3" y="10" width="11" height="4" rx="1" fill="currentColor"/>
+</svg>
+</button>
+<button class="pill set-icon-pill" id="btnDarkMode" aria-label="Chuyển sáng/tối" title="Chế độ tối">
+<svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<circle cx="12" cy="12" r="7"/>
+<circle cx="15" cy="10" r="5" fill="var(--panel)"/>
+</svg>
+<svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+<circle cx="12" cy="12" r="4" fill="currentColor" fill-opacity="0.15"/>
+</svg>
+</button>
+<button class="pill set-icon-pill" id="btnUiLang" aria-label="Đổi ngôn ngữ giao diện">
+<span class="lang-code">VI</span>
+</button>
+<button class="pill set-icon-pill" id="btnPrintPdf" aria-label="In / lưu bài kinh ra PDF" title="In PDF">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M7 9V3h10v6"/>
+<rect x="4" y="9" width="16" height="8" rx="1.5"/>
+<path d="M7 17v4h10v-4"/>
+<circle cx="17" cy="12.5" r="0.8" fill="currentColor"/>
+</svg>
+</button>
+</div>
+</div>
+</div>
+<div class="set-sec">
+<div class="set-sec-hd">
+<span class="set-sec-title" id="settingsLangLabel">Ngôn ngữ</span>
+<span class="set-sec-sub" id="settingsLangSub">Hiện / ẩn cột</span>
+</div>
+<div class="set-sec-body">
+<div class="set-pills cols-3">
+<button class="pill active" id="btnPali" aria-pressed="true">Pāli</button>
+<button class="pill active" id="btnEng"  aria-pressed="true">English</button>
+<button class="pill active" id="btnVie"  aria-pressed="true">Việt</button>
+</div>
+</div>
+</div>
+<div class="set-sec">
+<div class="set-sec-hd">
+<span class="set-sec-title" id="settingsHlLabel">Nổi bật</span>
+<span class="set-sec-sub" id="settingsHlSub">In nghiêng + đậm</span>
+</div>
+<div class="set-sec-body">
+<div class="set-pills cols-3">
+<button class="pill active" id="btnHlPli" aria-pressed="true" title="Nổi bật cột Pāli (italic + đậm)">Pāli</button>
+<button class="pill" id="btnHlEng" aria-pressed="false" title="Nổi bật cột English">English</button>
+<button class="pill" id="btnHlVie" aria-pressed="false" title="Nổi bật cột Việt">Việt</button>
+</div>
+</div>
+</div>
+<div class="set-sec" id="layoutRow">
+<div class="set-sec-hd">
+<span class="set-sec-title" id="settingsLayoutLabel">Bố cục</span>
+<span class="set-sec-sub" id="settingsLayoutSub">Cách hiển thị</span>
+</div>
+<div class="set-sec-body">
+<div class="set-pills cols-2" id="layoutSelectRow">
+<button class="pill" id="btnLayout" aria-pressed="false" title="Xếp dọc các cột">
+<span class="pill-icon">☰</span> Xếp dọc
+</button>
+<button class="pill" id="btn3Cols" aria-pressed="false" title="Chia đều 3 cột Pāli / English / Việt cùng hàng">
+<span class="pill-icon">⫴</span> 3 cột ngang
+</button>
+</div>
+<div class="set-pills cols-2" style="margin-top:4px">
+<button class="pill active" id="btnSegKey" aria-pressed="true" title="Hiện mã đoạn (vd AN1.11.1.1)">
+<span class="pill-icon">#</span> Segment
+</button>
+<button class="pill active" id="btnSegHdr" aria-pressed="true" title="Hiện nhãn cột Pali/English/Việt">
+<span class="pill-icon">▦</span> Label
+</button>
+</div>
+</div>
+</div>
+<div class="set-sec" id="commentRow">
+<div class="set-sec-hd">
+<span class="set-sec-title" id="settingsCmtLabel">Chú giải</span>
+<span class="set-sec-sub" id="settingsCmtSub">Hiện / ẩn theo ngôn ngữ</span>
+</div>
+<div class="set-sec-body">
+<div class="set-pills cols-1">
+<button class="pill active" id="btnCmtMaster" aria-pressed="true" title="Bật/tắt toàn bộ chú giải (3 ngôn ngữ)">
+<span class="pill-icon">💬</span> Tất cả
+</button>
+</div>
+<div class="set-pills cols-3" style="margin-top:4px">
+<button class="pill active" id="btnCmtPli" aria-pressed="true" title="Hiện/ẩn chú giải Pāli">
+<span class="pill-icon">💬</span> Pāli
+</button>
+<button class="pill active" id="btnCmtEng" aria-pressed="true" title="Hiện/ẩn chú giải English">
+<span class="pill-icon">💬</span> Eng
+</button>
+<button class="pill active" id="btnCmtVie" aria-pressed="true" title="Hiện/ẩn chú giải tiếng Việt">
+<span class="pill-icon">💬</span> Việt
+</button>
+</div>
+</div>
+</div>
+<button id="btnFullWidth" hidden aria-hidden="true"></button>
+<div class="set-sec">
+<div class="set-sec-hd">
+<span class="set-sec-title" id="settingsDisplayLabel">Hiển thị</span>
+</div>
+<div class="set-sec-body">
+<div class="slider-row">
+<span class="set-mini-label" id="settingsFontSizeLabel">Cỡ chữ</span>
+<input type="range" class="sutra-slider" id="sliderZoom"
+min="80" max="160" step="5" value="100"
+aria-label="Cỡ chữ">
+<span class="slider-value-badge" id="zoomValueBadge">100%</span>
+<button class="slider-reset-btn" id="btnZoomReset" title="Reset cỡ chữ" aria-label="Reset cỡ chữ">↺</button>
+</div>
+<div class="slider-row">
+<span class="set-mini-label" id="settingsLineHeightLabel">Giãn dòng</span>
+<input type="range" class="sutra-slider" id="sliderLineHeight"
+min="130" max="260" step="5" value="185"
+aria-label="Giãn dòng">
+<span class="slider-value-badge" id="lineHeightValueBadge">1.85</span>
+<button class="slider-reset-btn" id="btnLineHeightReset" title="Reset giãn dòng" aria-label="Reset giãn dòng">↺</button>
+</div>
+</div>
+</div>
+<div class="set-sec" id="ttsSection">
+<div class="set-sec-hd">
+<span class="set-sec-title" id="settingsTtsTitle">Đọc kinh</span>
+<span class="set-sec-sub" id="settingsTtsUiLabel">Text-to-Speech</span>
+</div>
+<div class="set-sec-body">
+<div class="tts-bar">
+<button class="tts-btn" id="btnReadTts"  title="Phát" aria-label="Phát TTS">▶&#xFE0E;</button>
+<button class="tts-btn" id="btnPauseTts" title="Tạm dừng" aria-label="Tạm dừng TTS" disabled>⏸&#xFE0E;</button>
+<button class="tts-btn" id="btnStopTts"  title="Dừng" aria-label="Dừng TTS" disabled>⏹&#xFE0E;</button>
+</div>
+<div class="set-note" id="settingsTtsNote">Chọn đoạn kinh rồi nhấn ▶ để nghe đọc.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="guideOverlay" role="dialog" aria-modal="true" aria-label="Hướng dẫn sử dụng"
+aria-hidden="true">
+<div class="guide-dialog"></div>
+</div>
+<script src="toc.js?v=44" defer></script>
+<script src="app.js?v=44" defer></script>
+</body>
+</html>

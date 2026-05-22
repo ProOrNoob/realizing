@@ -1,0 +1,40 @@
+window.BILARA = window.BILARA || {};
+window.BILARA["sn39_v1"] = window.BILARA["sn39_v1"] || {};
+window.BILARA["sn39_v1"]["en"] = {
+  "sn39.1-15:0.1": "Linked Discourses 39.1–15 ",
+  "sn39.1-15:0.2": "1. With Sāmaṇḍaka ",
+  "sn39.1-15:0.3": "With Sāmaṇḍaka on Extinguishment ",
+  "sn39.1-15:1.1": "At one time Venerable Sāriputta was staying in the land of the Vajjis near Ukkacelā on the bank of the Ganges river. ",
+  "sn39.1-15:1.2": "Then the wanderer Sāmaṇḍaka went up to Venerable Sāriputta and exchanged greetings with him. ",
+  "sn39.1-15:1.3": "When the greetings and polite conversation were over, he sat down to one side and said to Sāriputta: ",
+  "sn39.1-15:2.1": "“Reverend Sāriputta, they speak of this thing called ‘extinguishment’. ",
+  "sn39.1-15:2.2": "What is extinguishment?” ",
+  "sn39.1-15:2.3": "“Reverend, the ending of greed, hate, and delusion ",
+  "sn39.1-15:2.4": "is called extinguishment.” ",
+  "sn39.1-15:2.5": "“But, reverend, is there a path and a practice for realizing this extinguishment?” ",
+  "sn39.1-15:2.6": "“There is, reverend.” ",
+  "sn39.1-15:3.1": "“Well, what is it?” ",
+  "sn39.1-15:3.2": "“It is simply this noble eightfold path, that is: ",
+  "sn39.1-15:3.3": "right view, right purpose, right speech, right action, right livelihood, right effort, right mindfulness, and right immersion. ",
+  "sn39.1-15:3.4": "This is the path, the practice, for realizing this extinguishment.” ",
+  "sn39.1-15:3.5": "“Reverend, this is a fine path, a fine practice, for realizing this extinguishment. ",
+  "sn39.1-15:3.6": "Just this much is enough for diligence.” ",
+  "sn39.1-15:3.7": "",
+  "sn39.1-15:4.1": "(Tell in full  as the Linked Discourses with Jambukhādaka.) ",
+  "sn39.16:0.1": "Linked Discourses 39.16 ",
+  "sn39.16:0.2": "1. With Sāmaṇḍaka ",
+  "sn39.16:0.3": "Hard to Do ",
+  "sn39.16:1.1": "“Reverend Sāriputta, in this teaching and training, what is hard to do?” ",
+  "sn39.16:1.2": "“Going forth, reverend, is hard to do in this teaching and training.” ",
+  "sn39.16:1.3": "“But what’s hard to do for someone who has gone forth?” ",
+  "sn39.16:1.4": "“When you’ve gone forth it’s hard to be satisfied.” ",
+  "sn39.16:1.5": "“But what’s hard to do for someone who is satisfied?” ",
+  "sn39.16:1.6": "“When you’re satisfied, it’s hard to practice in line with the teaching.” ",
+  "sn39.16:1.7": "“But if a mendicant practices  in line with the teaching, will it take them long to become a perfected one?” ",
+  "sn39.16:1.8": "“Not long, reverend.” ",
+  "sn39.16:1.9": "",
+  "sn39.16:1.10": "",
+  "sn39.16:1.11": "The Linked Discourses with Sāmaṇḍaka are complete. "
+}
+window.BILARA["sn39_v1"]["en"]["sn39_v1:source"] =
+  "SOURCE: https://suttacentral.net/  TRANSLATE BY SUJATO";
