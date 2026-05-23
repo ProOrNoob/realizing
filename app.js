@@ -253,7 +253,7 @@ var virtAllRows = [];   // row data array (cho TTS + anchor khi chunk chưa mate
 var virtMatObs = null;
 var virtDemObs = null;
 var LANG_STORAGE_KEY = 'sutra_ui_lang';
-var uiLang = storage.get(LANG_STORAGE_KEY) === 'en' ? 'en' : 'vi';
+var uiLang = storage.get(LANG_STORAGE_KEY) === 'vi' ? 'vi' : 'en';
 window.SUTRA_UI_LANG = uiLang;
 var KEY_LAST     = 'lastSutraId';
 var KEY_VIEW     = 'sutra_view_prefs';
