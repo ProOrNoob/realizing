@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="description" content="About Realizi.ng — an independent educational platform providing access to canonical Buddhist texts.">
+<title>About &amp; Terms — Sutta Archive</title>
+<script>
+(function(){
+try {
+var t = localStorage.getItem('sutra-dark-mode');
+if (t === 'dark') document.documentElement.setAttribute('data-theme','dark');
+else if (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+document.documentElement.setAttribute('data-theme','dark');
+} catch(e){}
+try {
+var lang = localStorage.getItem('sutra_ui_lang') === 'vi' ? 'vi' : 'en';
+document.documentElement.setAttribute('data-lang', lang);
+document.documentElement.lang = lang;
+} catch(e){ document.documentElement.setAttribute('data-lang','en'); }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Noto+Serif:ital,wght@0,400;0,500;1,400&family=Geist+Mono:wght@300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Noto+Serif:ital,wght@0,400;0,500;1,400&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="styles.css?v=42">
+<style>
+html,body{overflow:auto;height:auto}
+/* Language visibility */
+html[data-lang="en"] .t-vi{display:none}
+html[data-lang="vi"] .t-en{display:none}
+.t-vi{font-family:var(--serif-vi)}
+.about-page{min-height:100vh;display:flex;flex-direction:column;align-items:center;background:var(--bg);position:relative;z-index:2}
+.about-topbar{width:100%;flex:0 0 auto;background:var(--bg);border-bottom:1px solid var(--rule);position:relative}
+.about-topbar::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.85}
+.about-topbar-in{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 32px}
+.about-back{display:inline-flex;align-items:center;gap:6px;background:none;border:0;color:var(--ink-3);font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;cursor:pointer;padding:4px 10px;border-radius:4px;transition:color .15s,background .15s}
+.about-back svg{width:13px;height:13px;flex-shrink:0}
+@media (hover:hover){.about-back:hover{color:var(--ink);background:color-mix(in oklab,var(--ink) 5%,transparent)}}
+.about-topbar-title{font-family:var(--serif);font-style:italic;font-weight:300;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);flex:1}
+.about-lang-btn{background:none;border:1px solid var(--rule);color:var(--ink-3);font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;padding:4px 10px;border-radius:3px;transition:color .15s,border-color .15s,background .15s}
+@media (hover:hover){.about-lang-btn:hover{color:var(--accent);border-color:var(--accent);background:color-mix(in oklab,var(--accent) 8%,transparent)}}
+.about-content{width:100%;max-width:680px;margin:0 auto;padding:56px 32px 80px;flex:1}
+.about-ornament{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:40px;color:var(--accent);opacity:0.7}
+.about-ornament::before,.about-ornament::after{content:"";display:block;height:1px;width:60px;background:color-mix(in oklab,var(--accent) 40%,transparent)}
+.about-ornament-mark{font-family:var(--serif-pali);font-style:italic;font-size:20px;letter-spacing:0.08em;color:var(--accent);opacity:0.85}
+.about-h1{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(28px,5vw,38px);line-height:1.15;letter-spacing:-0.01em;color:var(--ink);margin:0 0 8px;text-align:center}
+.about-tagline{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);text-align:center;margin:0 0 48px}
+.about-divider{height:1px;background:linear-gradient(90deg,transparent,var(--rule),transparent);margin:32px 0}
+.about-section{margin-bottom:40px}
+.about-section-label{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+.about-body{font-family:var(--serif);font-size:16.5px;line-height:1.75;color:var(--ink-2);margin:0}
+.about-body+.about-body{margin-top:14px}
+.about-body strong{font-weight:500;color:var(--ink);font-style:normal}
+.about-notice{display:flex;gap:14px;align-items:flex-start;padding:16px 20px;border:1px solid color-mix(in oklab,var(--accent) 30%,var(--rule));border-radius:4px;background:color-mix(in oklab,var(--accent) 5%,var(--bg));margin-top:32px}
+.about-notice-icon{color:var(--accent);opacity:0.75;flex-shrink:0;margin-top:2px}
+.about-notice-icon svg{width:18px;height:18px;display:block}
+.about-notice-text{font-family:var(--serif);font-size:15px;line-height:1.65;color:var(--ink-2);margin:0;font-style:italic}
+.about-notice-text.t-vi{font-family:var(--serif-vi)}
+.about-footer{width:100%;border-top:1px solid var(--rule-2);padding:14px 32px;display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;color:var(--ink-4)}
+.about-footer a{color:var(--accent);text-decoration:none;transition:color .15s}
+@media (hover:hover){.about-footer a:hover{color:var(--accent-2)}}
+@media (max-width:600px){
+.about-topbar-in{padding:10px 18px}
+.about-content{padding:40px 18px 60px}
+.about-body{font-size:15.5px}
+.about-footer{padding:12px 18px}
+}
+</style>
+</head>
+<body>
+<div class="about-page">
+  <nav class="about-topbar" role="navigation">
+    <div class="about-topbar-in">
+      <a href="index.html" class="about-back" id="backLink" aria-label="Back to reading">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>
+        <span class="t-en">Back</span>
+        <span class="t-vi">Quay lại</span>
+      </a>
+      <span class="about-topbar-title">Sutta Archive</span>
+      <button class="about-lang-btn" id="aboutLangBtn" type="button" aria-label="Switch language / Đổi ngôn ngữ">VI / EN</button>
+    </div>
+  </nav>
+
+  <main class="about-content" role="main">
+    <div class="about-ornament" aria-hidden="true">
+      <span class="about-ornament-mark">❧</span>
+    </div>
+
+    <h1 class="about-h1">
+      <span class="t-en">About &amp; Terms</span>
+      <span class="t-vi">Giới thiệu &amp; Điều khoản</span>
+    </h1>
+    <p class="about-tagline">Realizi.ng</p>
+
+    <!-- Section 1 -->
+    <div class="about-section">
+      <p class="about-section-label">
+        <span class="t-en">About this platform</span>
+        <span class="t-vi">Về nền tảng này</span>
+      </p>
+      <p class="about-body t-en">
+        Realizi.ng is an independent educational platform providing access to canonical Buddhist texts
+        for practitioners and scholars worldwide.
+      </p>
+      <p class="about-body t-vi">
+        Realizi.ng là nền tảng học thuật độc lập cung cấp quyền truy cập vào các văn bản Phật giáo kinh điển
+        cho những người hành trì và học giả trên toàn thế giới.
+      </p>
+      <p class="about-body t-en" style="margin-top:14px">
+        Texts are sourced from <strong>SuttaCentral</strong> and the <strong>Bilara JSON project</strong>,
+        presented in Pāli, English, and Vietnamese side by side to support close study and comparison.
+      </p>
+      <p class="about-body t-vi" style="margin-top:14px">
+        Các bài kinh được lấy từ <strong>SuttaCentral</strong> và <strong>dự án Bilara JSON</strong>,
+        trình bày song song bằng tiếng Pāli, tiếng Anh và tiếng Việt để hỗ trợ việc học và so sánh chuyên sâu.
+      </p>
+    </div>
+
+    <div class="about-divider" aria-hidden="true"></div>
+
+    <!-- Section 2 -->
+    <div class="about-section">
+      <p class="about-section-label">
+        <span class="t-en">Purpose &amp; scope</span>
+        <span class="t-vi">Mục đích &amp; phạm vi</span>
+      </p>
+      <p class="about-body t-en">
+        This site is offered freely as a scholarly resource. All textual content belongs to its
+        respective translators and rights holders. No commercial use is intended or permitted.
+        Translations are reproduced for personal study, research, and educational purposes only.
+      </p>
+      <p class="about-body t-vi">
+        Trang web này được cung cấp miễn phí như một tài nguyên học thuật. Toàn bộ nội dung văn bản thuộc về
+        các dịch giả và chủ sở hữu bản quyền tương ứng. Không có mục đích hoặc cho phép sử dụng vì mục đích thương mại.
+        Các bản dịch được trích dẫn chỉ nhằm mục đích nghiên cứu cá nhân, nghiên cứu học thuật và giáo dục.
+      </p>
+    </div>
+
+    <div class="about-divider" aria-hidden="true"></div>
+
+    <!-- Section 3 -->
+    <div class="about-section">
+      <p class="about-section-label">
+        <span class="t-en">Disclaimer</span>
+        <span class="t-vi">Tuyên bố miễn trừ trách nhiệm</span>
+      </p>
+      <p class="about-body t-en">
+        This website is for educational and scholarly purposes only.
+        We do not promote or solicit religious conversion.
+      </p>
+      <p class="about-body t-vi">
+        Trang web này chỉ dành cho mục đích giáo dục và học thuật.
+        Chúng tôi không khuyến khích hoặc vận động cải đạo tôn giáo.
+      </p>
+    </div>
+
+    <div class="about-notice" role="note">
+      <span class="about-notice-icon" aria-hidden="true">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="10" cy="10" r="8"/>
+          <path d="M10 6v4M10 13.5h.01"/>
+        </svg>
+      </span>
+      <p class="about-notice-text t-en">
+        This is an independent project and does not represent SuttaCentral or any religious organisation.
+        Textual content is sourced from SuttaCentral and the Bilara JSON project under open-source licensing.
+      </p>
+      <p class="about-notice-text t-vi">
+        Đây là dự án độc lập, không đại diện cho SuttaCentral hay bất kỳ tổ chức tôn giáo nào.
+        Nội dung kinh văn được lấy từ SuttaCentral và dự án Bilara JSON theo giấy phép mã nguồn mở.
+      </p>
+    </div>
+  </main>
+
+  <footer class="about-footer">
+    <span class="t-en">Educational &amp; scholarly use only</span>
+    <span class="t-vi">Chỉ dành cho mục đích giáo dục &amp; học thuật</span>
+    <span aria-hidden="true">·</span>
+    <a href="index.html">
+      <span class="t-en">Return to reading</span>
+      <span class="t-vi">Quay lại đọc kinh</span>
+    </a>
+  </footer>
+</div>
+<script>
+(function(){
+var LANG_KEY = 'sutra_ui_lang';
+var btn = document.getElementById('aboutLangBtn');
+function getLang(){ try{ return localStorage.getItem(LANG_KEY) === 'vi' ? 'vi' : 'en'; }catch(e){ return 'en'; } }
+function applyLang(lang){
+document.documentElement.setAttribute('data-lang', lang);
+document.documentElement.lang = lang;
+try{ localStorage.setItem(LANG_KEY, lang); }catch(e){}
+}
+if(btn){
+btn.addEventListener('click', function(){
+applyLang(getLang() === 'en' ? 'vi' : 'en');
+});
+}
+})();
+</script>
+</body>
+</html>
