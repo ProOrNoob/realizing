@@ -26,13 +26,13 @@ document.documentElement.lang = lang;
 <noscript><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Noto+Serif:ital,wght@0,400;0,500;1,400&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="styles.css?v=42">
 <style>
-html,body{overflow:auto !important;height:auto !important;overscroll-behavior:auto !important}
 /* Language visibility */
 html[data-lang="en"] .t-vi{display:none}
 html[data-lang="vi"] .t-en{display:none}
 .t-vi{font-family:var(--serif-vi)}
-.about-page{min-height:100vh;display:flex;flex-direction:column;align-items:center;background:var(--bg);position:relative;z-index:2}
-.about-topbar{width:100%;flex:0 0 auto;background:var(--bg);border-bottom:1px solid var(--rule);position:relative}
+/* Full-viewport fixed layout — header + footer pinned, only content scrolls */
+.about-page{height:100vh;height:100dvh;display:flex;flex-direction:column;background:var(--bg);position:relative;z-index:2;overflow:hidden}
+.about-topbar{flex:0 0 auto;width:100%;background:var(--bg);border-bottom:1px solid var(--rule);position:relative;z-index:10}
 .about-topbar::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.85}
 .about-topbar-in{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 32px}
 .about-back{display:inline-flex;align-items:center;gap:6px;background:none;border:0;color:var(--ink-3);font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;cursor:pointer;padding:4px 10px;border-radius:4px;transition:color .15s,background .15s}
@@ -41,7 +41,13 @@ html[data-lang="vi"] .t-en{display:none}
 .about-topbar-title{font-family:var(--serif);font-style:italic;font-weight:300;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);flex:1}
 .about-lang-btn{background:none;border:1px solid var(--rule);color:var(--ink-3);font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;padding:4px 10px;border-radius:3px;transition:color .15s,border-color .15s,background .15s}
 @media (hover:hover){.about-lang-btn:hover{color:var(--accent);border-color:var(--accent);background:color-mix(in oklab,var(--accent) 8%,transparent)}}
-.about-content{width:100%;max-width:680px;margin:0 auto;padding:56px 32px 80px;flex:1}
+/* Scroll wrapper — this is the only thing that scrolls */
+.about-scroller{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:var(--bg)}
+.about-scroller::-webkit-scrollbar{width:8px}
+.about-scroller::-webkit-scrollbar-track{background:transparent}
+.about-scroller::-webkit-scrollbar-thumb{background:color-mix(in oklab,var(--ink-4) 50%,transparent);border-radius:999px}
+.about-scroller::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+.about-content{width:100%;max-width:680px;margin:0 auto;padding:56px 32px 64px}
 .about-ornament{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:40px;color:var(--accent);opacity:0.7}
 .about-ornament::before,.about-ornament::after{content:"";display:block;height:1px;width:60px;background:color-mix(in oklab,var(--accent) 40%,transparent)}
 .about-ornament-mark{font-family:var(--serif-pali);font-style:italic;font-size:20px;letter-spacing:0.08em;color:var(--accent);opacity:0.85}
@@ -58,17 +64,18 @@ html[data-lang="vi"] .t-en{display:none}
 .about-notice-icon svg{width:18px;height:18px;display:block}
 .about-notice-text{font-family:var(--serif);font-size:15px;line-height:1.65;color:var(--ink-2);margin:0;font-style:italic}
 .about-notice-text.t-vi{font-family:var(--serif-vi)}
-.about-footer{width:100%;border-top:1px solid var(--rule-2);padding:14px 32px;display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;color:var(--ink-4)}
+/* Footer — pinned at bottom */
+.about-footer{flex:0 0 auto;width:100%;border-top:1px solid var(--rule-2);padding:14px 32px;padding-bottom:max(14px,env(safe-area-inset-bottom,14px));display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;color:var(--ink-4);background:var(--bg)}
 .about-footer a{color:var(--accent);text-decoration:none;transition:color .15s}
 @media (hover:hover){.about-footer a:hover{color:var(--accent-2)}}
 @media (max-width:600px){
 .about-topbar-in{padding:10px 18px}
-.about-content{padding:40px 18px 60px}
+.about-content{padding:40px 18px 48px}
 .about-body{font-size:15.5px}
-.about-footer{padding:12px 18px}
+.about-footer{padding:10px 18px}
 }
 /* Back-to-top button */
-.about-back-top{position:fixed;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 20px);width:36px;height:36px;border-radius:50%;background:var(--panel);border:1px solid color-mix(in oklab,var(--ink-3) 30%,transparent);color:var(--ink-3);cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(6px) scale(.94);pointer-events:none;transition:opacity .22s,transform .22s,border-color .15s,color .15s,background .15s;z-index:50;box-shadow:0 2px 10px color-mix(in oklab,var(--ink) 6%,transparent)}
+.about-back-top{position:absolute;right:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 64px);width:36px;height:36px;border-radius:50%;background:var(--panel);border:1px solid color-mix(in oklab,var(--ink-3) 30%,transparent);color:var(--ink-3);cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(6px) scale(.94);pointer-events:none;transition:opacity .22s,transform .22s,border-color .15s,color .15s,background .15s;z-index:15;box-shadow:0 2px 10px color-mix(in oklab,var(--ink) 6%,transparent)}
 .about-back-top svg{width:14px;height:14px}
 .about-back-top.visible{opacity:0.9;transform:translateY(0) scale(1);pointer-events:auto}
 @media (hover:hover){.about-back-top:hover{opacity:1;color:var(--accent);border-color:var(--accent)}}
@@ -89,6 +96,7 @@ html[data-lang="vi"] .t-en{display:none}
     </div>
   </nav>
 
+  <div class="about-scroller" id="aboutScroller">
   <main class="about-content" role="main">
     <div class="about-ornament" aria-hidden="true">
       <span class="about-ornament-mark">❧</span>
@@ -179,20 +187,21 @@ html[data-lang="vi"] .t-en{display:none}
       </p>
     </div>
   </main>
+</div><!-- /.about-scroller -->
 
-  <button class="about-back-top" id="aboutBackTop" aria-label="Lên đầu trang" title="Back to top">
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5"/></svg>
-  </button>
-  <footer class="about-footer">
-    <span class="t-en">Educational &amp; scholarly use only</span>
-    <span class="t-vi">Chỉ dành cho mục đích giáo dục &amp; học thuật</span>
-    <span aria-hidden="true">·</span>
-    <a href="index.html">
-      <span class="t-en">Return to reading</span>
-      <span class="t-vi">Quay lại đọc kinh</span>
-    </a>
-  </footer>
-</div>
+<button class="about-back-top" id="aboutBackTop" aria-label="Lên đầu trang" title="Back to top">
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5"/></svg>
+</button>
+<footer class="about-footer">
+  <span class="t-en">Educational &amp; scholarly use only</span>
+  <span class="t-vi">Chỉ dành cho mục đích giáo dục &amp; học thuật</span>
+  <span aria-hidden="true">·</span>
+  <a href="index.html">
+    <span class="t-en">Return to reading</span>
+    <span class="t-vi">Quay lại đọc kinh</span>
+  </a>
+</footer>
+</div><!-- /.about-page -->
 <script>
 (function(){
 var LANG_KEY = 'sutra_ui_lang';
@@ -208,14 +217,15 @@ btn.addEventListener('click', function(){
 applyLang(getLang() === 'en' ? 'vi' : 'en');
 });
 }
-// Back-to-top
+// Back-to-top — listens on the inner scroller, not window
 var topBtn = document.getElementById('aboutBackTop');
-if(topBtn){
-window.addEventListener('scroll', function(){
-topBtn.classList.toggle('visible', window.scrollY > 200);
+var scroller = document.getElementById('aboutScroller');
+if(topBtn && scroller){
+scroller.addEventListener('scroll', function(){
+topBtn.classList.toggle('visible', scroller.scrollTop > 200);
 }, {passive:true});
 topBtn.addEventListener('click', function(){
-window.scrollTo({top:0, behavior:'smooth'});
+scroller.scrollTo({top:0, behavior:'smooth'});
 });
 }
 })();
