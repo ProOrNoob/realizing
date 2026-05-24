@@ -282,3 +282,4 @@ html #btnBackTop:not(.visible):active{opacity:0;pointer-events:none}
 @media (hover:hover){.disclaimer-link:hover{color:var(--accent-2);opacity:1}}
 .disclaimer-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
 @media (max-width:500px){.site-disclaimer{gap:4px;padding:5px 12px;font-size:9.5px}}
+html:not(.is-welcome) .site-disclaimer{display:none}

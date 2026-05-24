@@ -732,6 +732,7 @@ var viHtml =
 '<h3>ℹ Nguồn</h3>' +
 '<p>Văn bản Pāli + bản dịch tiếng Anh Bhikkhu Sujato từ <a href="https://suttacentral.net/" target="_blank" rel="noopener">SuttaCentral</a> (dự án Bilara). Bản dịch tiếng Việt biên tập từ nhiều nguồn, có thể còn sai sót — vui lòng đối chiếu bản Pāli và tiếng Anh.</p>' +
 '<p>Góp ý, báo lỗi: <a href="mailto:tuanctvn199@gmail.com">tuanctvn199@gmail.com</a></p>' +
+'<p><a href="about.html" target="_blank" rel="noopener">Giới thiệu &amp; Điều khoản</a></p>' +
 '<button id="btnCloseGuide" type="button">Đóng</button>';
 var enHtml =
 '<h2>User Guide</h2>' +
@@ -776,6 +777,7 @@ var enHtml =
 '<h3>ℹ Sources</h3>' +
 '<p>Pāli text and Bhikkhu Sujato English translations from <a href="https://suttacentral.net/" target="_blank" rel="noopener">SuttaCentral</a> (Bilara project). Vietnamese translations compiled from multiple sources — please cross-reference with Pāli and English originals.</p>' +
 '<p>Feedback / bug reports: <a href="mailto:tuanctvn199@gmail.com">tuanctvn199@gmail.com</a></p>' +
+'<p><a href="about.html" target="_blank" rel="noopener">About &amp; Terms</a></p>' +
 '<button id="btnCloseGuide" type="button">Close</button>';
 dlg.innerHTML = isEn ? enHtml : viHtml;
 var btnClose = $('btnCloseGuide');
