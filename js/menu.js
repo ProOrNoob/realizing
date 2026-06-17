@@ -1,3 +1,19 @@
+/* ================================================================
+   menu.js — Module [7/8]
+   Menu thư viện (TOC tree), tìm kiếm bài kinh, bookmark UI,
+   share/copy link (segment + title), toast notification,
+   event delegation cho grid (copy cột, share segment) và menu
+   (mở bài kinh, toggle nhóm, bookmark star).
+   ─────────────────────────────────────────────────────────────────
+   Exports: SA.buildSutraMenuFromIndex, SA.highlightActiveInMenu,
+            SA.syncTileToCurrentSutta, SA.findNikayaOfSutta,
+            SA.initDelegations, SA.applyTitleBookmarkState,
+            SA.updateBookmarksCount, SA.reflectBookmarkState,
+            SA.revealCurrentSuttaInMenu, SA.renderBookmarksList,
+            SA.extractGroupKey, SA._showToast
+   Depends: utils.js, state.js, ui.js, render.js (SA.findMetaById)
+   Runtime calls: SA.openSutra (from js/tts.js)
+   ================================================================ */
 (function () {
 'use strict';
 var SA = window.SA;

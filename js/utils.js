@@ -1,3 +1,11 @@
+/* ================================================================
+   utils.js — Module [1/8]
+   Khởi tạo namespace SA, các hàm tiện ích dùng chung.
+   ─────────────────────────────────────────────────────────────────
+   Exports: SA.$, SA.escapeHtml, SA.escapeAttr, SA.safeDomId,
+            SA.debounce, SA.throttle, SA.storage, SA.safeCssEscape
+   Depends: (none — first module loaded)
+   ================================================================ */
 (function () {
 'use strict';
 var SA = window.SA = window.SA || {};

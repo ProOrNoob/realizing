@@ -1,3 +1,19 @@
+/* ================================================================
+   ui.js — Module [4/8]
+   Giao diện: mở/đóng panel, settings, guide dialog, zoom,
+   line-height, bật/tắt cột ngôn ngữ, segment key/header visibility,
+   reading progress toggle, UI language rendering.
+   ─────────────────────────────────────────────────────────────────
+   Exports: SA.togglePanel, SA.closePanels, SA.openGuide,
+            SA.closeGuide, SA.renderUiLangFlag,
+            SA.applyUiLanguageToSearchUi,
+            SA.applyUiLanguageToSettingsPanel,
+            SA.renderGuideDialog, SA.updateMenuPanelTop,
+            SA.applySegKeyHdrVis, SA.updateVisibleCols,
+            SA.applyVisibility, SA.preserveTopAndSave,
+            SA.loadZoom, SA.loadLineHeight, SA.syncCmtButtons
+   Depends: utils.js, state.js
+   ================================================================ */
 (function () {
 'use strict';
 var SA = window.SA;

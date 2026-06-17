@@ -1,3 +1,11 @@
+/* ================================================================
+   bilara.js — Module [2/8]
+   Tải dữ liệu kinh từ file pack (pli/en/vi), cache LRU 20 bài.
+   ─────────────────────────────────────────────────────────────────
+   Exports: SA.loadMerged(id), SA.MERGED_CACHE, SA.LOADED_PACKS
+   Depends: utils.js
+   Data format: sutta/<lang>/<id>.js → ghi vào window.BILARA[id]
+   ================================================================ */
 (function () {
 'use strict';
 var SA = window.SA;

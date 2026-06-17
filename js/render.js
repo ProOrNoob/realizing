@@ -1,3 +1,20 @@
+/* ================================================================
+   render.js — Module [6/8]
+   Virtual scroll engine: chia rows thành chunks ~50 dòng,
+   materialize/dematerialize bằng IntersectionObserver.
+   renderSutra() là pipeline chính: load data → build chunks →
+   eager materialize quanh anchor → restore scroll.
+   ─────────────────────────────────────────────────────────────────
+   Exports: SA.findMetaById, SA.renderSutra, SA.renderWelcomeScreen,
+            SA.setupChunkObservers, SA.teardownChunkObservers,
+            SA.ensureRowRendered, SA.buildSuttaPrintHtml,
+            SA.resolveCommentLang
+   Depends: utils.js, bilara.js, state.js, ui.js, anchor.js
+   Runtime calls (defined in later modules, resolved at call time):
+     SA.resetTts, SA.setTtsUiState, SA.syncTileToCurrentSutta,
+     SA.highlightActiveInMenu, SA.updateNavButtons,
+     SA.applyTitleBookmarkState, SA.scheduleNextPreload
+   ================================================================ */
 (function () {
 'use strict';
 var SA = window.SA;
@@ -279,6 +296,43 @@ function setupChunkObservers() {
 }
 SA.setupChunkObservers = setupChunkObservers;
 
+function _findChunkForRow(rowIdx) {
+	for (var k = 0; k < s.virtChunks.length; k++) {
+		if (rowIdx >= s.virtChunks[k].rowStart && rowIdx < s.virtChunks[k].rowEnd) return k;
+	}
+	return 0;
+}
+
+function _progressiveFill(anchorChunkIdx, renderToken) {
+	var above = anchorChunkIdx - 2;
+	var below = anchorChunkIdx + 2;
+	var RANGE = 8;
+	var minChunk = Math.max(0, anchorChunkIdx - RANGE);
+	var maxChunk = Math.min(s.virtChunks.length - 1, anchorChunkIdx + RANGE);
+	var queue = [];
+	while (above >= minChunk || below <= maxChunk) {
+		if (above >= minChunk) queue.push(above--);
+		if (below <= maxChunk) queue.push(below++);
+	}
+	var idx = 0;
+	function fillNext() {
+		if (renderToken !== s.renderToken) return;
+		if (idx >= queue.length) return;
+		var ci = queue[idx++];
+		if (s.virtChunks[ci] && !s.virtChunks[ci].materialized) {
+			materializeChunk(s.virtChunks[ci]);
+		}
+		if (idx < queue.length) {
+			if (typeof requestIdleCallback === 'function') {
+				requestIdleCallback(fillNext, { timeout: 200 });
+			} else {
+				setTimeout(fillNext, 50);
+			}
+		}
+	}
+	fillNext();
+}
+
 function ensureRowRendered(rowIdx) {
 	for (var k = 0; k < s.virtChunks.length; k++) {
 		var c = s.virtChunks[k];
@@ -559,7 +613,7 @@ SA.renderSutra = async function renderSutra(id) {
 			}
 			var anchorIdx = (s.keyToRowIdx[anchorKey] != null) ? s.keyToRowIdx[anchorKey] : 0;
 			var anchorChunkIdx = Math.floor(anchorIdx / CHUNK_SIZE);
-			var lo = 0;
+			var lo = Math.max(0, anchorChunkIdx - 1);
 			var hi = Math.min(s.virtChunks.length - 1, anchorChunkIdx + 1);
 			for (var eci = lo; eci <= hi; eci++) materializeChunk(s.virtChunks[eci]);
 			var maxScrollY = scroller ? Math.max(0, scroller.scrollHeight - scroller.clientHeight) : 0;
@@ -590,6 +644,11 @@ SA.renderSutra = async function renderSutra(id) {
 				s._progScrollUntil = 0;
 				s.isRendering = false;
 				SA.setTtsUiState('idle');
+				if (token === s.renderToken && s.virtChunks.length > 3) {
+					var aKey = SA.getAnchorKeyFor(id);
+					var aIdx = aKey && s.keyToRowIdx[aKey] != null ? s.keyToRowIdx[aKey] : 0;
+					_progressiveFill(_findChunkForRow(aIdx), token);
+				}
 			}, 500);
 		});
 		SA.scheduleNextPreload(id);

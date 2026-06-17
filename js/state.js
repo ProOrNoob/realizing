@@ -1,3 +1,18 @@
+/* ================================================================
+   state.js — Module [3/8]
+   DOM refs (SA.dom), shared mutable state (SA.state), bookmark
+   management, anchor get/set (dual sessionStorage + localStorage),
+   view data cache (LRU), paragraph merging, DOM mode cache.
+   ─────────────────────────────────────────────────────────────────
+   Exports: SA.dom, SA.state, SA.anchorSet/Get/Remove,
+            SA.getAnchorKeyFor, SA._parseAnchorHash,
+            SA.loadBookmarks, SA.isBookmarked, SA.toggleBookmark,
+            SA.getSingleVisibleLang, SA.mergeRowsToParagraphRows,
+            SA.getViewData, SA.buildViewData, SA.saveViewPrefs,
+            SA.loadViewPrefs, SA._dmSaveCurrent, SA._dmTryRestore,
+            SA.maybeRerenderIfModeChanged
+   Depends: utils.js, bilara.js
+   ================================================================ */
 (function () {
 'use strict';
 var SA = window.SA;

@@ -1,3 +1,21 @@
+/* ================================================================
+   anchor.js — Module [5/8]
+   Hệ thống lưu/khôi phục vị trí đọc (scroll anchor).
+   IntersectionObserver theo dõi segment nào đang ở đầu viewport,
+   lưu vào sessionStorage + localStorage. Khi reload hoặc mở lại
+   bài kinh, khôi phục scroll đến đúng vị trí đã đọc.
+   ─────────────────────────────────────────────────────────────────
+   Exports: SA.getScrollRoot, SA.setupAnchorObserver,
+            SA.computeTopVisibleKey, SA.restoreScrollByAnchor,
+            SA.toggleBackTop, SA._saveAnchorDebounced,
+            SA.updateReadingProgress
+   Depends: utils.js, state.js
+   ─────────────────────────────────────────────────────────────────
+   Bug fixes applied:
+   1. scroll-behavior: smooth → dùng scrollTo({behavior:'instant'})
+   2. Scope fallback key mismatch → track foundKey thực tế
+   3. _progScrollUntil quá ngắn (700ms) → tăng lên 1200ms
+   ================================================================ */
 (function () {
 'use strict';
 var SA = window.SA;

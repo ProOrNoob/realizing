@@ -11,7 +11,7 @@ try {
 var t = localStorage.getItem('sutra-dark-mode');
 if (t === 'dark') {
 document.documentElement.setAttribute('data-theme','dark');
-} else if (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+} else if ( dark)').matches) {
 document.documentElement.setAttribute('data-theme','dark');
 }
 } catch(e){}
@@ -363,14 +363,6 @@ aria-label="Giãn dòng">
 aria-hidden="true">
 <div class="guide-dialog"></div>
 </div>
-<script src="toc.js?v=44" defer></script>
-<script src="js/utils.js?v=46" defer></script>
-<script src="js/bilara.js?v=46" defer></script>
-<script src="js/state.js?v=46" defer></script>
-<script src="js/ui.js?v=46" defer></script>
-<script src="js/anchor.js?v=46" defer></script>
-<script src="js/render.js?v=48" defer></script>
-<script src="js/menu.js?v=46" defer></script>
-<script src="js/tts.js?v=46" defer></script>
+<script src="app.bundle.js?v=63" defer></script>
 </body>
 </html>

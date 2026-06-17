@@ -1,3 +1,19 @@
+/* ================================================================
+   tts.js — Module [8/8] — Entry point
+   Chứa init(): khởi tạo toàn bộ app, wire event listeners.
+   TTS (lazy-load module tts.js ở root), print PDF, nav buttons
+   (prev/next), dark mode toggle, touch device detection,
+   nuclear sticky-hover fix cho mobile.
+   ─────────────────────────────────────────────────────────────────
+   Exports: SA.openSutra, SA.resetTts, SA.setTtsUiState,
+            SA.updateNavButtons, SA.scheduleNextPreload
+   Depends: tất cả các module trước (utils → menu)
+   ─────────────────────────────────────────────────────────────────
+   init() flow:
+     initUiLang → loadViewPrefs → sync button states →
+     loadBookmarks → applyVisibility → buildSutraMenuFromIndex →
+     initDelegations → openSutra(lastId) hoặc renderWelcomeScreen
+   ================================================================ */
 (function () {
 'use strict';
 var SA = window.SA;
