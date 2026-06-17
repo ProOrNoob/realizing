@@ -143,12 +143,8 @@ function closeGuide() {
 }
 
 var resizeObserver = new ResizeObserver(function (entries) {
-	for (var i = 0; i < entries.length; i++) {
-		requestAnimationFrame(function () {
-			if (d.sutraMenuPanel) {
-				d.sutraMenuPanel.style.top = entries[0].contentRect.height + 'px';
-			}
-		});
+	if (d.sutraMenuPanel && entries.length) {
+		d.sutraMenuPanel.style.top = entries[0].contentRect.height + 'px';
 	}
 });
 
@@ -345,7 +341,7 @@ function applyVisibility() {
 }
 SA.applyVisibility = applyVisibility;
 
-window.addEventListener('resize', function () { updateVisibleCols(); updateMenuPanelTop(); });
+window.addEventListener('resize', SA.throttle(function () { updateVisibleCols(); updateMenuPanelTop(); }, 100));
 
 var _langDepsBackup = { pli: null, eng: null, vie: null };
 function _applyHlBtnUi(lang) {
@@ -417,42 +413,24 @@ function preserveTopAndSave(action) {
 }
 SA.preserveTopAndSave = preserveTopAndSave;
 
-if (d.btnPali) d.btnPali.onclick = function () {
-	if (s.showPali && (s.showEng || s.showVie)) {}
-	else if (!s.showPali) {}
-	else return;
-	preserveTopAndSave(function () {
-		s.showPali = !s.showPali;
-		d.btnPali.classList.toggle('active', s.showPali);
-		d.btnPali.setAttribute('aria-pressed', String(s.showPali));
-		if (!s.showPali) _syncDepsOnLangHide('pli'); else _syncDepsOnLangShow('pli');
-		applyVisibility(); SA.saveViewPrefs(); SA.maybeRerenderIfModeChanged();
-	});
-};
-if (d.btnEng) d.btnEng.onclick = function () {
-	if (s.showEng && (s.showPali || s.showVie)) {}
-	else if (!s.showEng) {}
-	else return;
-	preserveTopAndSave(function () {
-		s.showEng = !s.showEng;
-		d.btnEng.classList.toggle('active', s.showEng);
-		d.btnEng.setAttribute('aria-pressed', String(s.showEng));
-		if (!s.showEng) _syncDepsOnLangHide('eng'); else _syncDepsOnLangShow('eng');
-		applyVisibility(); SA.saveViewPrefs(); SA.maybeRerenderIfModeChanged();
-	});
-};
-if (d.btnVie) d.btnVie.onclick = function () {
-	if (s.showVie && (s.showPali || s.showEng)) {}
-	else if (!s.showVie) {}
-	else return;
-	preserveTopAndSave(function () {
-		s.showVie = !s.showVie;
-		d.btnVie.classList.toggle('active', s.showVie);
-		d.btnVie.setAttribute('aria-pressed', String(s.showVie));
-		if (!s.showVie) _syncDepsOnLangHide('vie'); else _syncDepsOnLangShow('vie');
-		applyVisibility(); SA.saveViewPrefs(); SA.maybeRerenderIfModeChanged();
-	});
-};
+function _wireLangToggle(btn, stateKey, depsKey, otherKeys) {
+	if (!btn) return;
+	btn.onclick = function () {
+		if (s[stateKey] && (s[otherKeys[0]] || s[otherKeys[1]])) {}
+		else if (!s[stateKey]) {}
+		else return;
+		preserveTopAndSave(function () {
+			s[stateKey] = !s[stateKey];
+			btn.classList.toggle('active', s[stateKey]);
+			btn.setAttribute('aria-pressed', String(s[stateKey]));
+			if (!s[stateKey]) _syncDepsOnLangHide(depsKey); else _syncDepsOnLangShow(depsKey);
+			applyVisibility(); SA.saveViewPrefs(); SA.maybeRerenderIfModeChanged();
+		});
+	};
+}
+_wireLangToggle(d.btnPali, 'showPali', 'pli', ['showEng', 'showVie']);
+_wireLangToggle(d.btnEng,  'showEng',  'eng', ['showPali', 'showVie']);
+_wireLangToggle(d.btnVie,  'showVie',  'vie', ['showPali', 'showEng']);
 if (d.btnLayout) d.btnLayout.onclick = function () {
 	preserveTopAndSave(function () {
 		if (d.card) d.card.classList.toggle('stack');

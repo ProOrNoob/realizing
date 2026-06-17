@@ -209,6 +209,7 @@ function materializeChunk(chunkInfo) {
 		if (oldChunkBottom <= scroller.scrollTop) needsCompensation = true;
 	}
 	var frag = document.createDocumentFragment();
+	var rowEls = [];
 	for (var i = chunkInfo.rowStart; i < chunkInfo.rowEnd; i++) {
 		var rowData = s.virtAllRows[i];
 		if (!rowData) continue;
@@ -216,14 +217,12 @@ function materializeChunk(chunkInfo) {
 		frag.appendChild(wrap);
 		var innerRow = wrap.querySelector ? wrap.querySelector('.sutra-row') : wrap;
 		s.cachedRows[i] = innerRow || wrap;
+		if (s.anchorObserver) rowEls.push(innerRow || wrap);
 	}
 	chunkInfo.div.appendChild(frag);
 	chunkInfo.div.style.minHeight = '';
 	chunkInfo.materialized = true;
-	if (s.anchorObserver) {
-		var newRows = chunkInfo.div.querySelectorAll('.sutra-row');
-		for (var k = 0; k < newRows.length; k++) s.anchorObserver.observe(newRows[k]);
-	}
+	for (var k = 0; k < rowEls.length; k++) s.anchorObserver.observe(rowEls[k]);
 	if (needsCompensation && scroller) {
 		var newChunkRect = chunkInfo.div.getBoundingClientRect();
 		var newRootRect  = scroller.getBoundingClientRect();
@@ -326,7 +325,7 @@ function _progressiveFill(anchorChunkIdx, renderToken) {
 			if (typeof requestIdleCallback === 'function') {
 				requestIdleCallback(fillNext, { timeout: 200 });
 			} else {
-				setTimeout(fillNext, 50);
+				setTimeout(fillNext, 150);
 			}
 		}
 	}
